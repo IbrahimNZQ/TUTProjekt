@@ -1,0 +1,27 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: hl7_mysql
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hl7_db
+      MYSQL_USER: hl7_user
+      MYSQL_PASSWORD: hl7_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./mysql-custom.cnf:/etc/mysql/conf.d/custom.cnf
+    networks:
+      - hl7_network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  hl7_network:
+    driver: bridge

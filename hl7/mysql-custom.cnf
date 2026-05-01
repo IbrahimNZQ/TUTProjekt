@@ -1,0 +1,15 @@
+[mysqld]
+# TCP/IP Verbindungen bevorzugen
+bind-address = 0.0.0.0
+port = 3306
+
+# Standard Authentifizierungs-Plugin
+default-authentication-plugin = mysql_native_password
+
+# Sicherstellen, dass TCP-Verbindungen funktionieren
+skip-networking = 0
+
+[client]
+# Client-seitige Konfiguration
+default-character-set = utf8mb4
+port = 3306
